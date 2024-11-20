@@ -26,11 +26,13 @@ app.use(
 
 //Import Controller
 const authController = require("./controllers/auth")
+const moviesController = require("./controllers/movies")
 const isSignedIn = require("./middleware/is-signed-in.js")
 const passUserToView = require("./middleware/pass-user-to-view.js")
 
 //Invoke Controller
 app.use("/auth", authController)
+app.use("/movies", moviesController)
 
 app.use(
   session({
