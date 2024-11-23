@@ -12,18 +12,23 @@ router.get("/sign-up", (req, res) => {
 
 router.post("/sign-up", async (req, res) => {
   const userInDatabase = await User.findOne({ username: req.body.username })
-  if (userInDatabase) {
-    return res.send(`Username is taken`)
-  }
-  if (req.body.password !== req.body.confirmPassword) {
-    res.send(`password & confirm password doesn't match`)
-  }
+  try {
+    if (userInDatabase) {
+      return res.send(`Username is taken`)
+    }
+    if (req.body.password !== req.body.confirmPassword) {
+      res.send(`password & confirm password doesn't match`)
+    }
 
-  const hashedPassword = bcrypt.hashSync(req.body.password, 10)
-  req.body.password = hashedPassword
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10)
+    req.body.password = hashedPassword
 
-  const user = await User.create(req.body)
-  res.send(`Thanks for signing up ${user.username}`)
+    const user = await User.create(req.body)
+    res.send(`Thanks for signing up ${user.username}`)
+  } catch (err) {
+    console.log(err)
+    res.redirect("/")
+  }
 })
 
 router.get("/sign-in", async (req, res) => {
@@ -31,24 +36,29 @@ router.get("/sign-in", async (req, res) => {
 })
 
 router.post("/sign-in", async (req, res) => {
-  const userInDatabase = await User.findOne({ username: req.body.username })
-  if (!userInDatabase) {
-    res.send(`Login failed, please try again.`)
-  }
-  const validPass = bcrypt.compareSync(
-    req.body.password,
-    userInDatabase.password
-  )
-  if (!validPass) {
-    res.send(`Login Failed, please try again.`)
-  }
+  try {
+    const userInDatabase = await User.findOne({ username: req.body.username })
+    if (!userInDatabase) {
+      res.send(`Login failed, please try again.`)
+    }
+    const validPass = bcrypt.compareSync(
+      req.body.password,
+      userInDatabase.password
+    )
+    if (!validPass) {
+      res.send(`Login Failed, please try again.`)
+    }
 
-  req.session.user = {
-    username: userInDatabase.username,
-    _id: userInDatabase._id,
-  }
+    req.session.user = {
+      username: userInDatabase.username,
+      _id: userInDatabase._id,
+    }
 
-  res.redirect("/")
+    res.redirect("/")
+  } catch (error) {
+    console.log(error)
+    res.redirect("/")
+  }
 })
 
 router.get("/sign-out", (req, res) => {
