@@ -7,5 +7,10 @@
   </head>
   <body>
     <h1>All Movies</h1>
+    <ul>
+      <% movies.forEach((movie) => { %> <% if(movie.approved){ %>
+      <li><a href="/movies/<%=movie._id%>"><%= movie.title %></a></li>
+      <% }}) %>
+    </ul>
   </body>
 </html>

@@ -39,14 +39,14 @@ router.post("/sign-in", async (req, res) => {
   try {
     const userInDatabase = await User.findOne({ username: req.body.username })
     if (!userInDatabase) {
-      res.send(`Login failed, please try again.`)
+      return res.send(`Login failed, please try again.`)
     }
     const validPass = bcrypt.compareSync(
       req.body.password,
       userInDatabase.password
     )
     if (!validPass) {
-      res.send(`Login Failed, please try again.`)
+      return res.send(`Login Failed, please try again.`)
     }
 
     req.session.user = {
