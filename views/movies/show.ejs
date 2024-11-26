@@ -11,6 +11,12 @@
     <p>Plot: <%= movies.plot %></p>
     <p>Length: <%= movies.length %></p>
     <p>Genre: <%= movies.genre %></p>
+    <% if(user.isItAdmin){ %>
+    <a href="/movies/<%= movies._id%>/edit">Edit Title</a>
+    <form action="/movies/<%=movies._id%>?_method=DELETE" method="POST">
+      <button type="submit">Delete <%= movies.title %></button>
+    </form>
+    <% } %>
     <h2>Reviews & Ratings</h2>
     <p>Rating:</p>
     <p>My Rating:</p>

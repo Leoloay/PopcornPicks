@@ -24,11 +24,14 @@ app.use(
   })
 )
 
+const passUserToView = require("./middleware/pass-user-to-view.js")
+// Add our custom middleware right after the session middleware
+app.use(passUserToView)
+
 //Import Controller
 const authController = require("./controllers/auth")
 const moviesController = require("./controllers/movies")
 const isSignedIn = require("./middleware/is-signed-in.js")
-const passUserToView = require("./middleware/pass-user-to-view.js")
 
 //Invoke Controller
 app.use("/auth", authController)
@@ -41,8 +44,6 @@ app.use(
     saveUninitialized: true,
   })
 )
-// Add our custom middleware right after the session middleware
-app.use(passUserToView)
 
 // Landing Page
 app.get("/", (req, res) => {

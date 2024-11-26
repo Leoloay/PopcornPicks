@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies Requested</title>
+  </head>
+  <body>
+    <h1>Requested Movies:</h1>
+    <ul>
+      <% movies.forEach((movie) => { if(!movie.approved){ %>
+      <li><a href="/movies/requests/<%=movie._id%>"><%= movie.title %></a></li>
+      <% }}) %>
+    </ul>
+  </body>
+</html>

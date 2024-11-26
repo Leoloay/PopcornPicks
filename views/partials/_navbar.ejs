@@ -3,7 +3,9 @@
   <% if (user) { %>
   <a href="/auth/sign-out">Sign Out</a>
   <a href="/movies/new">Can't Find your Movie? Request to add</a>
-  <% } else { %>
+  <% if(user.isItAdmin){ %>
+  <a href="/movies/requests">Requests</a>
+  <% } %> <% } else { %>
   <a href="/auth/sign-up">Sign Up</a>
   <a href="/auth/sign-in">Sign In</a>
   <% } %>
