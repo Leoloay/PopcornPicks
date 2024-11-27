@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const Reviews = require("./reviews")
 
 const moviesSchema = new mongoose.Schema(
   {

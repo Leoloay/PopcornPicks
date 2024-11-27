@@ -38,6 +38,7 @@ router.get("/requests/:movieId", async (req, res) => {
 
 router.get("/:movieId", async (req, res) => {
   const foundMovie = await Movies.findById(req.params.movieId)
+
   res.render("movies/show.ejs", { movies: foundMovie })
 })
 
