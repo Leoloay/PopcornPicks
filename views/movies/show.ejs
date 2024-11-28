@@ -23,10 +23,10 @@
     <a href="/movies/<%= movies._id%>/reviews/new/<%= movies._id%>"
       >Add a review</a
     >
-    <% } %>
+    <% } else { %>
     <p>My Rating: <%= foundReview.rating %></p>
     <p>My Review: <%= foundReview.review %></p>
-    <a href="">Edit Review</a>
+    <% } %>
     <p>All Reviews:</p>
     <ul>
       <% reviews.forEach(review =>{ %>

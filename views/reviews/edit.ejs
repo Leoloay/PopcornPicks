@@ -7,5 +7,27 @@
   </head>
   <body>
     <h1>Edit your review:</h1>
+    <% review.forEach(review =>{ %>
+    <form
+      action="/movies/<%= review.movie.id %>/reviews/<%= review.id%>?_method=PUT"
+      method="post"
+    >
+      <label for="review">Review: </label>
+      <input
+        type="text"
+        name="review"
+        id="review"
+        value="<%= review.review %>"
+      />
+      <label for="rating">Rating: </label>
+      <input
+        type="text"
+        name="rating"
+        id="rating"
+        value="<%= review.rating %>"
+      />
+      <% }) %>
+      <button type="submit">Update review</button>
+    </form>
   </body>
 </html>

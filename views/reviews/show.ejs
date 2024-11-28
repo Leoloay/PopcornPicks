@@ -6,17 +6,25 @@
     <title>My Review</title>
   </head>
   <body>
-    <% review.forEach(review =>{ %>
+    <% if(review){ %> <% review.forEach(review =>{ %>
     <h1>My Review of <%= review.movie.title %></h1>
     <p>Review: <%= review.review %></p>
     <p>Rating: <%= review.rating %></p>
 
-    <a href="/movies/<%= review.movie.id%>/reviews/<%= review.id%>/edit"
+    <a href="/movies/<%= review.movie.id %>/reviews/<%= review.id %>/edit"
       >Edit Review</a
     >
-    <% }) %>
-    <form action="" method="POST">
+
+    <form
+      action="/movies/<%= review.movie.id %>/reviews/<%= review.id%>?_method=DELETE"
+      method="POST"
+    >
       <button type="submit">Delete review</button>
     </form>
+    <% }) %> } else{ %>
+    <a href="/movies/<%= movies._id%>/reviews/new/<%= movies._id%>"
+      >Add a review</a
+    >
+    <% } %>
   </body>
 </html>
