@@ -19,11 +19,23 @@
     <% } %>
     <h2>Reviews & Ratings</h2>
     <p>Rating:</p>
+    <% if(!foundReview){ %>
     <a href="/movies/<%= movies._id%>/reviews/new/<%= movies._id%>"
       >Add a review</a
     >
-    <p>My Rating:</p>
-    <p>My Review:</p>
-    <p>Other Reviews:</p>
+    <% } %>
+    <p>My Rating: <%= foundReview.rating %></p>
+    <p>My Review: <%= foundReview.review %></p>
+    <a href="">Edit Review</a>
+    <p>All Reviews:</p>
+    <ul>
+      <% reviews.forEach(review =>{ %>
+      <li>
+        A
+        <a href="/movies/<%=movies._id%>/reviews/<%= review._id %>">review</a>
+        from <%= review.owner.username %> with a rating of <%= review.rating %>
+      </li>
+      <% }) %>
+    </ul>
   </body>
 </html>

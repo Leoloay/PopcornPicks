@@ -4,13 +4,24 @@ const Movies = require("../models/movies")
 const router = express.Router()
 
 router.get("/", async (req, res) => {
-  res.render("movies/show.ejs")
+  const foundReview = await Reviews.findById(req.session.user._id)
+  const allReviews = await Reviews.find(req.params.movieId)
+  res.render("movies/show.ejs", { review: foundReview, reviews: allReviews })
 })
 
 router.get("/new/:movieId", async (req, res) => {
+  const foundReview = await Reviews.findOne({
+    owner: req.session.user._id,
+    movie: req.params.movieId,
+  }).populate("owner")
+  if (foundReview) {
+    return res.send(`You already have a review`)
+  }
   const foundMovie = await Movies.findById(req.params.movieId)
-  console.log(foundMovie)
-  res.render("reviews/new.ejs", { movies: foundMovie })
+
+  res.render("reviews/new.ejs", {
+    movies: foundMovie,
+  })
 })
 
 router.post("/new", async (req, res) => {
@@ -22,6 +33,17 @@ router.post("/new", async (req, res) => {
   res.redirect("/")
 })
 
-router.get("/:reviewId", async (req, res) => {})
+router.get("/:reviewId", async (req, res) => {
+  const foundReview = await Reviews.find({ _id: req.params.reviewId }).populate(
+    "movie"
+  )
+  console.log(foundReview)
+  res.render("reviews/show.ejs", { review: foundReview })
+})
+
+router.get("/:reviewId/edit", async (req, res) => {
+  const foundReview = await Reviews.find({ _id: req.params.reviewId })
+  res.render("reviews/edit.ejs", { foundReview })
+})
 
 module.exports = router

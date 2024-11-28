@@ -3,6 +3,8 @@ const router = express.Router()
 
 const Movies = require("../models/movies")
 const User = require("../models/user")
+const Reviews = require("../models/reviews")
+
 const isSignedIn = require("../middleware/is-signed-in")
 
 router.get("/new", isSignedIn, async (req, res) => {
@@ -38,8 +40,18 @@ router.get("/requests/:movieId", async (req, res) => {
 
 router.get("/:movieId", async (req, res) => {
   const foundMovie = await Movies.findById(req.params.movieId)
+  const foundReview = await Reviews.findOne({
+    owner: req.session.user._id,
+  }).populate("owner")
+  console.log("owner: ", req.session.user)
 
-  res.render("movies/show.ejs", { movies: foundMovie })
+  const allReviews = await Reviews.find({}).populate("owner")
+  console.log(foundReview)
+  res.render("movies/show.ejs", {
+    movies: foundMovie,
+    foundReview,
+    reviews: allReviews,
+  })
 })
 
 router.get("/:movieId/edit", async (req, res) => {

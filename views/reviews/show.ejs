@@ -6,6 +6,17 @@
     <title>My Review</title>
   </head>
   <body>
-    <h1>My Review</h1>
+    <% review.forEach(review =>{ %>
+    <h1>My Review of <%= review.movie.title %></h1>
+    <p>Review: <%= review.review %></p>
+    <p>Rating: <%= review.rating %></p>
+
+    <a href="/movies/<%= review.movie.id%>/reviews/<%= review.id%>/edit"
+      >Edit Review</a
+    >
+    <% }) %>
+    <form action="" method="POST">
+      <button type="submit">Delete review</button>
+    </form>
   </body>
 </html>
