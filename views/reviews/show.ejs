@@ -4,10 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Review</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Fira Sans", sans-serif;
+        background: linear-gradient(120deg, #0b0b0b, #1f1f1f);
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
+
+      h1,
+      h2 {
+        color: #ffd700;
+        margin: 0;
+      }
+
+      p {
+        color: #e0e0e0;
+        margin: 5px 0;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 20px auto;
+        max-width: 800px;
+        text-align: left;
+      }
+
+      li {
+        margin: 10px 0;
+        padding: 10px;
+        background: #333333;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      li a {
+        color: #ffd700;
+      }
+
+      li a:hover {
+        text-decoration: underline;
+        color: #ffffff;
+      }
+      a,
+      button {
+        margin: 10px 5px;
+        display: inline-block;
+        text-decoration: none;
+        color: #ffffff;
+        background: #b28228;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <% if(review){ %> <% review.forEach(review =>{ %>
-    <h1>My Review of <%= review.movie.title %></h1>
+    <h1><%= review.owner.username %> Review of <%= review.movie.title %></h1>
     <p>Review: <%= review.review %></p>
     <p>Rating: <%= review.rating %></p>
 
@@ -16,15 +78,15 @@
     >
 
     <form
-      action="/movies/<%= review.movie.id %>/reviews/<%= review.id%>?_method=DELETE"
+      action="/movies/<%= review.movie._id %>/reviews/<%= review.id%>?_method=DELETE"
       method="POST"
     >
       <button type="submit">Delete review</button>
     </form>
-    <% }) %> } else{ %>
-    <a href="/movies/<%= movies._id%>/reviews/new/<%= movies._id%>"
+    <% }) } else { review.forEach(review =>{ %>
+    <a href="/movies/<%= review.movie._id %>/reviews/new/<%= movies._id %>"
       >Add a review</a
     >
-    <% } %>
+    <% })} %>
   </body>
 </html>

@@ -4,6 +4,71 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Request to Add</title>
+    <%- include("../partials/_navbar.ejs") %>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Fira Sans", sans-serif;
+        background: linear-gradient(120deg, #0b0b0b, #1f1f1f);
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      h1 {
+        font-family: "Yuji Mai", serif;
+        color: #ffd700;
+        margin-bottom: 20px;
+      }
+
+      label,
+      input {
+        display: block;
+        margin-top: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #ffd700;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        background: #444;
+        color: #fff;
+      }
+
+      input::placeholder {
+        color: #bbb;
+      }
+
+      button {
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #6855e0;
+        padding: 10px 20px;
+        margin-top: 20px;
+        width: 100%;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #5746c9;
+        transform: translateY(-2px);
+      }
+    </style>
   </head>
   <body>
     <h1>Request to Add a Movie:</h1>

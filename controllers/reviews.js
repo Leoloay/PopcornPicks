@@ -40,7 +40,8 @@ router.get("/:reviewId", async (req, res) => {
 
 router.get("/:reviewId/edit", async (req, res) => {
   const foundReview = await Reviews.find({ _id: req.params.reviewId }).populate(
-    "movie"
+    "movie",
+    "owner"
   )
   res.render("reviews/edit.ejs", { review: foundReview })
 })

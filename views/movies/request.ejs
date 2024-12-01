@@ -4,6 +4,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movies Requested</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Fira Sans", sans-serif;
+        background: linear-gradient(120deg, #0b0b0b, #1f1f1f);
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
+
+      h1,
+      h2 {
+        color: #ffd700;
+        margin: 0;
+      }
+
+      p {
+        color: #e0e0e0;
+        margin: 5px 0;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 20px auto;
+        max-width: 800px;
+        text-align: left;
+      }
+
+      li {
+        margin: 10px 0;
+        padding: 10px;
+        background: #333333;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      li a {
+        color: #ffd700;
+      }
+
+      li a:hover {
+        text-decoration: underline;
+        color: #ffffff;
+      }
+      a,
+      button {
+        margin: 10px 5px;
+        display: inline-block;
+        text-decoration: none;
+        color: #ffffff;
+        background: #b28228;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <h1>Requested Movies:</h1>

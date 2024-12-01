@@ -1,3 +1,33 @@
+<style>
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(90deg, #1a1a1a, #3e3e3e);
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  nav a {
+    color: #ffd700;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: "Fira Sans", sans-serif;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: rgba(255, 215, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  nav a:hover {
+    background: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+  }
+</style>
+
 <nav>
   <a href="/movies">All Movies</a>
   <% if (user) { %>

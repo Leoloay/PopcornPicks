@@ -4,6 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All Movies</title>
+    <%- include("../partials/_navbar.ejs") %>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Fira Sans", sans-serif;
+        background: linear-gradient(120deg, #0b0b0b, #1f1f1f);
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-family: "Yuji Mai", serif;
+        color: #ffd700;
+        margin-bottom: 20px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      li {
+        background: #333333;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        padding: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        max-width: 300px;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+
+      li:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5);
+      }
+
+      a {
+        text-decoration: none;
+        color: #ffd700;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
     <h1>All Movies</h1>
