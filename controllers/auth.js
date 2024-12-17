@@ -14,17 +14,17 @@ router.post("/sign-up", async (req, res) => {
   const userInDatabase = await User.findOne({ username: req.body.username })
   try {
     if (userInDatabase) {
-      return res.send(`Username is taken`)
+      return res.render("auth/usernameIsTaken.ejs")
     }
     if (req.body.password !== req.body.confirmPassword) {
-      res.send(`password & confirm password doesn't match`)
+      return res.render("auth/sign-up-failed.ejs")
     }
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
     req.body.password = hashedPassword
 
     const user = await User.create(req.body)
-    res.send(`Thanks for signing up ${user.username}`)
+    res.redirect("/")
   } catch (err) {
     console.log(err)
     res.redirect("/")
@@ -39,14 +39,14 @@ router.post("/sign-in", async (req, res) => {
   try {
     const userInDatabase = await User.findOne({ username: req.body.username })
     if (!userInDatabase) {
-      return res.send(`Login failed, please try again.`)
+      return res.render("auth/sign-in-failed.ejs")
     }
     const validPass = bcrypt.compareSync(
       req.body.password,
       userInDatabase.password
     )
     if (!validPass) {
-      return res.send(`Login Failed, please try again.`)
+      return res.render("auth/sign-in-failed.ejs")
     }
 
     req.session.user = {

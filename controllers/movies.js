@@ -38,20 +38,25 @@ router.get("/requests/:movieId", async (req, res) => {
   res.render("movies/edit.ejs", { movies: foundMovie })
 })
 
-router.get("/:movieId", async (req, res) => {
-  const foundMovie = await Movies.findById(req.params.movieId)
-  const foundReview = await Reviews.findOne({
-    owner: req.session.user._id,
-  }).populate("owner")
-  console.log("owner: ", req.session.user)
+router.get("/:movieId", isSignedIn, async (req, res) => {
+  try {
+    const foundMovie = await Movies.findById(req.params.movieId)
+    const foundReview = await Reviews.findOne({
+      owner: req.session.user._id,
+    }).populate("owner")
+    console.log("owner: ", req.session.user)
 
-  const allReviews = await Reviews.find({}).populate("owner")
-  console.log(foundReview)
-  res.render("movies/show.ejs", {
-    movies: foundMovie,
-    foundReview,
-    reviews: allReviews,
-  })
+    const allReviews = await Reviews.find({}).populate("owner")
+    console.log(foundReview)
+    res.render("movies/show.ejs", {
+      movies: foundMovie,
+      foundReview,
+      reviews: allReviews,
+    })
+  } catch (error) {
+    console.log(error)
+    res.redirect("/auth/sign-in")
+  }
 })
 
 router.get("/:movieId/edit", async (req, res) => {
